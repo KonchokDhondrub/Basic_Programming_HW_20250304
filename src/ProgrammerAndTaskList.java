@@ -42,7 +42,8 @@ public class ProgrammerAndTaskList {
 
         programmersAndTasks.add(new Programmer("Grace Lehmann", "Köln", Arrays.asList(
                 new Task(9, "Code cleanup", "testing", 7),
-                new Task(19, "Update dependencies", "review", 6)
+                new Task(19, "Update dependencies", "review", 6),
+                new Task(18, "Fix authentication bug", "testing", 6)
         )));
 
         programmersAndTasks.add(new Programmer("Ian Schäfer", "Berlin", Arrays.asList(
@@ -54,6 +55,10 @@ public class ProgrammerAndTaskList {
                 new Task(12, "Setup CI/CD", "done", 14),
                 new Task(22, "Automate deployment", "review", 12)
         )));
+
+        programmersAndTasks.add(new Programmer("James Blacker", "Berlin", null));
+
+        programmersAndTasks.add(null);
     }
 
     public List<Programmer> getProgrammersAndTasks() {

@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 public class Task {
     private int number;
     private String description;
@@ -31,15 +29,11 @@ public class Task {
         if (o == null || getClass() != o.getClass()) return false;
 
         Task task = (Task) o;
-        return getNumber() == task.getNumber() && getDaysInProcessing() == task.getDaysInProcessing() && Objects.equals(getDescription(), task.getDescription()) && Objects.equals(getStatus(), task.getStatus());
+        return getNumber() == task.getNumber();
     }
     @Override
     public int hashCode() {
-        int result = getNumber();
-        result = 31 * result + Objects.hashCode(getDescription());
-        result = 31 * result + Objects.hashCode(getStatus());
-        result = 31 * result + getDaysInProcessing();
-        return result;
+        return getNumber();
     }
 
     @Override
@@ -48,7 +42,6 @@ public class Task {
         statusf.append(status.toUpperCase().charAt(0))
                 .append(status.substring(1));
 
-        return String.format("\t%2d) %-26s Status: %-14s Days in process: %d", number, description, statusf, daysInProcessing)
-                +System.lineSeparator();
+        return String.format("\t%2d) %-26s Status: %-14s Days in process: %d", number, description, statusf, daysInProcessing);
     }
 }

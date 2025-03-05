@@ -40,10 +40,19 @@ public class Programmer {
     @Override
     public String toString() {
         StringBuilder tasksFormatted = new StringBuilder();
-        for (Task task : tasks) {
-            tasksFormatted.append(task.toString());
+
+        if (tasks != null) {
+            List<Task> filteredTasks = tasks.stream().filter(Objects::nonNull).toList();
+            String separator = filteredTasks.size() > 1 ? "\n" : "";
+
+            for (int i = 0; i < filteredTasks.size(); i++) {
+                tasksFormatted.append(filteredTasks.get(i).toString());
+                if (i < filteredTasks.size() - 1) {
+                    tasksFormatted.append(separator);
+                }
+            }
         }
 
-        return String.format("%-14s [%s]  Tasks:\n%s", name, city, tasksFormatted);
+        return String.format("%-14s [%s]  Tasks:\n%s", name, city, (tasks == null) ? "\tNo Tasks" : tasksFormatted);
     }
 }
