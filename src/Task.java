@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 public class Task {
     private int number;
     private String description;
@@ -5,6 +9,13 @@ public class Task {
     private int daysInProcessing;
 
     public Task(int number, String description, String status, int daysInProcessing) {
+        this.number = number;
+        this.description = description;
+        this.status = status;
+        this.daysInProcessing = daysInProcessing;
+    }
+
+    public Task(String description, String status, int daysInProcessing) {
         this.number = number;
         this.description = description;
         this.status = status;
@@ -42,6 +53,7 @@ public class Task {
         statusf.append(status.toUpperCase().charAt(0))
                 .append(status.substring(1));
 
-        return String.format("\t%2d) %-26s Status: %-14s Days in process: %d", number, description, statusf, daysInProcessing);
+        return String.format(((number!=0) ? "\t%2d) " : "%s") + "%-26s Status: %-14s Days in process: %d",
+                ((number!=0) ? number : ""), description, statusf, daysInProcessing);
     }
 }

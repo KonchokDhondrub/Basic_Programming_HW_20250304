@@ -48,7 +48,8 @@ public class ProgrammerAndTaskList {
 
         programmersAndTasks.add(new Programmer("Ian Schäfer", "Berlin", Arrays.asList(
                 new Task(11, "Improve performance", "done", 8),
-                new Task(21, "Add caching mechanism", "review", 3)
+                new Task(21, "Add caching mechanism", "review", 3),
+                new Task(22, "Automate deployment", "review", 12)
         )));
 
         programmersAndTasks.add(new Programmer("Jack Neumann", "Berlin", Arrays.asList(
