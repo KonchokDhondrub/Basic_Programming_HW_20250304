@@ -25,8 +25,8 @@ public class Main {
         Map<Integer, Task> getTaskByNumberWithDescription = getTaskByNumberWithDescription(programmers);
 //         printMap(getTaskByNumberWithDescription.entrySet());
 
-        Map<String, Integer> getAllTaskInCity = getAllTaskInCity(programmers, reqCity);
-//        printMap(getAllTaskInCity.entrySet());
+        Map<String, Integer> getAllTaskInCity = getAllTaskInCity(programmers);
+        printMap(getAllTaskInCity.entrySet());
 
     }
 
@@ -40,19 +40,16 @@ public class Main {
         return nullValuesRemove(list).stream()
                 .flatMap(p -> p.getTasks().stream())
                 .distinct()
-                .collect(Collectors.toMap(
-                        Task::getNumber,
+                .collect(Collectors.toMap(Task::getNumber,
                         t -> new Task(t.getDescription(), t.getStatus(), t.getDaysInProcessing())));
     }
 
-    public static Map<String, Integer> getAllTaskInCity(List<Programmer> list, String city) {
+    public static Map<String, Integer> getAllTaskInCity(List<Programmer> list) {
         return nullValuesRemove(list).stream()
-                .filter(p -> p.getCity().equalsIgnoreCase(city))
-                .flatMap(p -> p.getTasks().stream())
-                    .distinct()
-                    .collect(Collectors.toMap(t -> city,
-                        t -> 1, (a,b) -> a + b)
-                );
+                .collect(Collectors.toMap(p -> p.getCity(),
+                        p -> p.getTasks().stream().distinct()
+                                .mapToInt(t -> 1).sum(), (a, b) -> a + b
+                ));
     }
 
     public static List<Programmer> nullValuesRemove(List<Programmer> list){
