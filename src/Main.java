@@ -26,7 +26,7 @@ public class Main {
 //         printMap(getTaskByNumberWithDescription.entrySet());
 
         Map<String, Integer> getAllTaskInCity = getAllTaskInCity(programmers);
-        printMap(getAllTaskInCity.entrySet());
+//        printMap(getAllTaskInCity.entrySet());
 
     }
 
