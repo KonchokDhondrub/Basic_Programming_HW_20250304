@@ -47,13 +47,16 @@ public class Task {
         return getNumber();
     }
 
+    private StringBuilder firstLetterToUppercase(String a){
+        StringBuilder result = new StringBuilder();
+        result.append(a.toUpperCase().charAt(0))
+                .append(a.substring(1));
+        return result;
+    }
+
     @Override
     public String toString() {
-        StringBuilder statusf = new StringBuilder();
-        statusf.append(status.toUpperCase().charAt(0))
-                .append(status.substring(1));
-
         return String.format(((number!=0) ? "\t%2d) " : "%s") + "%-26s Status: %-14s Days in process: %d",
-                ((number!=0) ? number : ""), description, statusf, daysInProcessing);
+                ((number!=0) ? number : ""), description, firstLetterToUppercase(status), daysInProcessing);
     }
 }
