@@ -20,13 +20,13 @@ public class Main {
 
         // Tasks 05.03.2025
         Map<String, Integer> getProgrammersAndTaskAmount = getProgrammersAndTaskAmount(programmers);
-//         printMap(getProgrammersAndTaskAmount.entrySet());
+//         printMap(getProgrammersAndTaskAmount);
 
         Map<Integer, Task> getTaskByNumberWithDescription = getTaskByNumberWithDescription(programmers);
-//         printMap(getTaskByNumberWithDescription.entrySet());
+//         printMap(getTaskByNumberWithDescription);
 
         Map<String, Integer> getAllTaskInCity = getAllTaskInCity(programmers);
-//        printMap(getAllTaskInCity.entrySet());
+//        printMap(getAllTaskInCity);
 
     }
 
@@ -102,8 +102,8 @@ public class Main {
                 .filter(p -> Objects.nonNull(p))
                 .forEach(a -> System.out.println(a));
     }
-    public static <K, V> void printMap(Collection<Map.Entry<K, V>> list) {
-        list.stream()
+    public static <K, V> void printMap(Map<K, V> list) {
+        list.entrySet().stream()
                 .filter(p -> Objects.nonNull(p))
                 .forEach(a -> System.out.println(a.getKey() + ": " + a.getValue()));
     }
