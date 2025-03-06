@@ -37,12 +37,11 @@ public class Programmer {
         return result;
     }
 
-    @Override
-    public String toString() {
+    private StringBuilder taskListOutputFilter(List<Task> list) {
         StringBuilder tasksFormatted = new StringBuilder();
 
-        if (tasks != null) {
-            List<Task> filteredTasks = tasks.stream().filter(Objects::nonNull).toList();
+        if (list != null) {
+            List<Task> filteredTasks = list.stream().filter(Objects::nonNull).toList();
             String separator = filteredTasks.size() > 1 ? "\n" : "";
 
             for (int i = 0; i < filteredTasks.size(); i++) {
@@ -53,6 +52,11 @@ public class Programmer {
             }
         }
 
-        return String.format("%-14s [%s]  Tasks:\n%s", name, city, (tasks == null) ? "\tNo Tasks" : tasksFormatted);
+        return tasksFormatted;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%-14s [%s]  Tasks:\n%s", name, city, (tasks == null) ? "\tNo Tasks" : taskListOutputFilter(tasks));
     }
 }
