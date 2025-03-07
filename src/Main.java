@@ -26,27 +26,37 @@ public class Main {
 
 
         // Tasks 06.03.2025
-        Map<String, List<String>> getMapOfProgrammersInCities = getMapOfProgrammersInCities(programmers);
+        Map<String, List<Programmer>> getMapOfProgrammersInCities = getMapOfProgrammersInCities(programmers);
 //        printMap(getMapOfProgrammersInCities);
 
         Map<Integer, List<String>> getProgrammersByTaskNumber = getProgrammersByTaskNumber(programmers);
-        printMap(getProgrammersByTaskNumber);
+//        printMap(getProgrammersByTaskNumber);
 
     }
+
     // Tasks 06.03.2025
-    public static Map<String, List<String>> getMapOfProgrammersInCities(List<Programmer> list) {
+    public static Map<String, List<Programmer>> getMapOfProgrammersInCities(List<Programmer> list) {
         return list.stream()
-                .collect(Collectors.groupingBy(
-                        Programmer::getCity,
-                        Collectors.mapping(Programmer::getName, Collectors.toList())
-                ));
+                .collect(Collectors.groupingBy(Programmer::getCity));
     }
     public static Map<Integer, List<String>> getProgrammersByTaskNumber(List<Programmer> programmers) {
+        class TaskAssignment {
+            private final int taskNumber;
+            private final String programmerName;
+
+            public TaskAssignment(int taskNumber, String programmerName) {
+                this.taskNumber = taskNumber;
+                this.programmerName = programmerName;
+            }
+
+            public int getTaskNumber() { return taskNumber; }
+            public String getProgrammerName() { return programmerName; }
+        }
+
         return programmers.stream()
                 .flatMap(p -> p.getTasks().stream()
-                        .map(t -> new TaskAssignment(t.getNumber(), p.getName()))) // Map.entry()
-                .collect(Collectors.groupingBy(
-                        TaskAssignment::getTaskNumber,
+                        .map(t -> new TaskAssignment(t.getNumber(), p.getName()) )) // Map.entry()
+                .collect(Collectors.groupingBy(TaskAssignment::getTaskNumber,
                         Collectors.mapping(TaskAssignment::getProgrammerName, Collectors.toList())
                 ));
     }
@@ -74,7 +84,6 @@ public class Main {
 
 
     // Tasks 04.03.2025
-
     public static List<Task> allTasks(List<Programmer> programmers) {
         if (programmers == null) return Collections.emptyList();
         return programmers.stream()
@@ -126,17 +135,4 @@ public class Main {
                 .filter(p -> Objects.nonNull(p))
                 .forEach(a -> System.out.println(a.getKey() + ": " + a.getValue()));
     }
-}
-
-class TaskAssignment {
-    private final int taskNumber;
-    private final String programmerName;
-
-    public TaskAssignment(int taskNumber, String programmerName) {
-        this.taskNumber = taskNumber;
-        this.programmerName = programmerName;
-    }
-
-    public int getTaskNumber() { return taskNumber; }
-    public String getProgrammerName() { return programmerName; }
 }

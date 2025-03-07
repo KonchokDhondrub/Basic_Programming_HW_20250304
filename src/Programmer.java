@@ -1,3 +1,4 @@
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -41,17 +42,15 @@ public class Programmer {
         StringBuilder tasksFormatted = new StringBuilder();
 
         if (list != null) {
-            List<Task> filteredTasks = list.stream().filter(Objects::nonNull).toList();
-            String separator = filteredTasks.size() > 1 ? "\n" : "";
+            String separator = list.size() > 1 ? "\n" : "";
 
-            for (int i = 0; i < filteredTasks.size(); i++) {
-                tasksFormatted.append(filteredTasks.get(i).toString());
-                if (i < filteredTasks.size() - 1) {
+            for (int i = 0; i < list.size(); i++) {
+                tasksFormatted.append(list.get(i).toString());
+                if (i < list.size() - 1) {
                     tasksFormatted.append(separator);
                 }
             }
         }
-
         return tasksFormatted;
     }
 
